@@ -10,6 +10,8 @@ export class BinaryReader {
   }
 
   readUint32(): number {
-    return this.view.getUint32(this.position++);
+    let value = this.view.getUint32(this.position, { littleEndian: true });
+    this.position += 4;
+    return value;
   }
 }

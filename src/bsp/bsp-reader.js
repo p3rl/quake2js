@@ -16,21 +16,24 @@ interface Bsp {
 }
 
 function readHeader(reader: BinaryReader): BspHeader {
+  let magic = reader.readUint32();
+  let version = reader.readUint32();
+  let lumps = readLumps(reader);
+
   return {
-    magic: reader.readUint32(),
-    version: reader.readUint32(),
-    lumps: readLumps(reader)
+    magic: magic,
+    version: version,
+    lumps: lumps
   };
 }
 
 function readLumps(reader: BinaryReader): BspLump[] {
-  let numLumps = 19;
-  let lumps = BspLump[numLumps];
+  const numLumps = 19;
+  let lumps = [numLumps];
   for (let i = 0; i < numLumps; ++i) {
-    numLumps[i] = {
-      offset: reader.readUint32(),
-      length: reader.readUint32()
-    };
+    let lumpOffset = reader.readUint32();
+    let lumpLength = reader.readUint32();
+    lumps[i] = { offset: lumpOffset, length: lumpLength };
   }
   return lumps;
 }
