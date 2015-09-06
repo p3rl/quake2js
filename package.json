@@ -1,0 +1,32 @@
+{
+  "name": "quake2js",
+  "version": "0.1.0",
+  "description": "Quake 2 port to javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Per Larsson",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^4.1.1",
+    "browser-sync": "^2.9.1",
+    "del": "^2.0.1",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-eslint": "^1.0.0",
+    "jspm": "^0.16.2",
+    "object.assign": "^4.0.1",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.1.2",
+    "vinyl-paths": "^2.0.0"
+  },
+  "jspm": {
+    "directories": {},
+    "dependencies": {
+      "axios": "npm:axios@^0.5.4",
+      "core-js": "npm:core-js@^1.1.4"
+    },
+    "devDependencies": {}
+  }
+}
