@@ -2,6 +2,12 @@ System.config({
   baseURL: "/",
   defaultJSExtensions: true,
   transpiler: "babel",
+  babelOptions: {
+    "optional": [
+      "runtime",
+      "optimisation.modules.system"
+    ]
+  },
   paths: {
     "*": "dist/*",
     "github:*": "jspm_packages/github/*",
@@ -10,6 +16,8 @@ System.config({
 
   map: {
     "axios": "npm:axios@0.5.4",
+    "babel": "npm:babel-core@5.8.23",
+    "babel-runtime": "npm:babel-runtime@5.8.20",
     "core-js": "npm:core-js@1.1.4",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -59,6 +67,9 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0",
       "url": "github:jspm/nodelibs-url@0.1.0"
+    },
+    "npm:babel-runtime@5.8.20": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:buffer@3.4.3": {
       "base64-js": "npm:base64-js@0.0.8",

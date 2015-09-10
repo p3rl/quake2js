@@ -1,21 +1,15 @@
-import * as axios from 'axios';
 import {BspReader} from 'bsp/bsp-reader';
 console.log('Starting quake 2');
 
-axios.get('http://localhost:3000/maps/base1.bsp')
-  .then(response => {
-    let bspString = response.data;
-    let reader = new BspReader();
-    let bsp = reader.readFromString(bspString);
-
-    console.log('magic: ', bsp.header.magic);
-    console.log('version: ', bsp.header.version);
-    for (let i = 0; i < 19; ++i) {
-      console.log('Lump ' + i);
-      console.log('  Offset: ' + bsp.header.lumps[i].offset);
-      console.log('  Length: ' + bsp.header.lumps[i].length);
-    }
-  })
-  .catch(error => {
-    console.log('An error occurred while parsing bsp map: ' + error);
-  });
+var request = new XMLHttpRequest();
+request.onreadystatechange = () => {
+  if (request.readyState == 4 && request.status == 200) {
+    var bspReader = new BspReader();
+    var map = bspReader.readFromString(request.responseText);
+	}
+};
+request.open('GET', 'http://localhost:3000/maps/q2dm1', true);
+request.overrideMimeType('text/plain; charset=x-user-defined');
+//request.responseType = 'arraybuffer';
+request.setRequestHeader('Content-Type', 'text/plain');
+request.send(null);
