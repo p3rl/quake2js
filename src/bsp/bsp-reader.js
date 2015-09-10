@@ -100,7 +100,7 @@ function readEdges(reader: BinaryReader, lump: BspLump): BspVertex[] {
     let edges = new Array();
     reader.position = lump.offset;
     for (let i = 0; i < numEdges; ++i) {
-      edges.push([reader.readUint16(), reader.readUint16()]);    
+      edges.push([reader.readUint16(), reader.readUint16()]);
     }
     return edges;
   } catch (e) {
@@ -108,20 +108,16 @@ function readEdges(reader: BinaryReader, lump: BspLump): BspVertex[] {
   }
 }
 
-export class BspReader {
-  constructor() { }
-
-  readFromString(bsp: string): Bsp {
-    if (!bsp || bsp.length === 0) {
-      throw new Error('Invalid bsp string');
-    }
-
-    let reader = new BinaryReader(bsp);
-    let header = readHeader(reader);
-    let vertices = readVertices(reader, header.lumps[2]);
-    //let edges = readEdges(reader, header.lumps[11]);
-    return {
-      header: header
-    };
+export function readFromBuffer(buffer: ArrayBuffer): Bsp {
+  if (!buffer) {
+    throw new Error('Invalid buffer');
   }
+
+  let reader = new BinaryReader(buffer);
+  let header = readHeader(reader);
+  let vertices = readVertices(reader, header.lumps[2]);
+  //let edges = readEdges(reader, header.lumps[11]);
+  return {
+    header: header
+  };
 }
