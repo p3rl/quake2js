@@ -12,7 +12,10 @@ export class BinaryReader {
   }
 
   seek(offset: number): void {
-    this.position = offset;
+		if (offset >= this.bufferLength) {
+			throw new Error('Position out of bounds');
+		}
+		this.position = offset;
   }
 
 	advance(bytes: number): void {
@@ -48,7 +51,7 @@ export class BinaryReader {
     for (let i = 0; i < length; ++i) {
       value += String.fromCharCode(array[i]);
     }
-    this.advance(this, length);
+    this.advance(length);
     return value;
   }
 }

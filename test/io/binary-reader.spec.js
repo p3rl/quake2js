@@ -5,7 +5,7 @@ describe('binary-reader', () => {
   it('should throw when initialized with invalid buffer', () => {
     var create = () => {
       new BinaryReader(null);
-    }
+    };
     expect(create).toThrowError('Invalid buffer');
   });
 
@@ -78,4 +78,51 @@ describe('binary-reader', () => {
 		expect(reader.bytesRead).toEqual(expectedBytesRead);
 		expect(reader.bytesLeft()).toEqual(expectedBytesLeft);
   });
+
+	it('should read string correctly and change position and bytes read', () =>{
+		// Arrange
+		const expectedBytesRead = 4;
+		const expectedPosition = 4;
+		const expectedBytesLeft = 0;
+		const expectedString = "IBSP"
+		let buffer = new ArrayBuffer(4);
+		let view = new Uint8Array(buffer);
+		for (let i = 0; i < expectedString.length; ++i) {
+			view[i] = expectedString.charCodeAt(i);
+		}
+		let reader = new BinaryReader(buffer);
+
+		// Act
+		let val = reader.readString(4);
+
+		// Assert
+		expect(val).toMatch(expectedString);
+		expect(reader.position).toEqual(expectedPosition);
+		expect(reader.bytesRead).toEqual(expectedBytesRead);
+		expect(reader.bytesLeft()).toEqual(expectedBytesLeft);
+	});
+
+	it ('should seek to valid position', () => {
+		// Arrange
+		let buffer = new ArrayBuffer(4);
+		let reader = new BinaryReader(buffer);
+
+		// Act
+		reader.seek(2);
+
+		// Assert
+		expect(reader.position).toEqual(2);
+	});
+
+	it ('should throw when seeking to valid position outside buffer', () => {
+		// Arrange
+		let buffer = new ArrayBuffer(4);
+		let reader = new BinaryReader(buffer);
+		let seek = () => {
+			reader.seek(5);
+		};
+
+		// Act & assert
+		expect(seek).toThrowError('Position out of bounds');
+	});
 });
