@@ -3,5 +3,9 @@
     "target": "ES6",
     "module": "system"
   },
-  "files": "src/**/*.js"
+  "files": [
+    "src/io/binary-reader.js",
+    "src/bsp/bsp-reader.js",
+    "node_modules/jasmine-core/lib/jasmine-core/jasmine.js"
+  ]
 }

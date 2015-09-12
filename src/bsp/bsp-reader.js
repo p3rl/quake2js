@@ -55,7 +55,7 @@ function readHeader(reader: BinaryReader): BspHeader {
       version: reader.readUint32(),
       lumps: readLumps(reader)
     };
-  } catch(e) {
+  } catch (e) {
     throw new Error('Failed to read header, error=' + e);
   }
 }
@@ -86,7 +86,7 @@ function readVertices(reader: BinaryReader, lump: BspLump): BspVertex[] {
         reader.readFloat32(),
         reader.readFloat32(),
         reader.readFloat32()
-      ])
+      ]);
     }
     return vertices;
   } catch (e) {
@@ -116,8 +116,11 @@ export function readFromBuffer(buffer: ArrayBuffer): Bsp {
   let reader = new BinaryReader(buffer);
   let header = readHeader(reader);
   let vertices = readVertices(reader, header.lumps[2]);
-  //let edges = readEdges(reader, header.lumps[11]);
+  let edges = readEdges(reader, header.lumps[11]);
+
   return {
-    header: header
+    header: header,
+    vertices: vertices,
+    edges: edges
   };
 }

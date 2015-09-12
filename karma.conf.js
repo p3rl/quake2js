@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Fri Dec 05 2014 16:49:29 GMT-0500 (EST)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -15,7 +15,7 @@ module.exports = function(config) {
     jspm: {
       // Edit this to your needs
       loadFiles: ['test/**/*.js'],
-      serveFiles : ['src/**/*.js']
+      serveFiles: ['src/**/*.js']
     },
 
 

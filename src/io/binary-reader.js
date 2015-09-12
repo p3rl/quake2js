@@ -1,11 +1,9 @@
-function advance(reader: BinaryReader, bytes: number): void {
-  reader.position += bytes;
-  reader.bytesRead += bytes;
-}
-
 export class BinaryReader {
 
   constructor(buffer: ArrayBuffer) {
+    if (buffer == null || buffer.byteLength === 0) {
+      throw new TypeError('Invalid buffer');
+    }
     this.bytesRead = 0;
     this.bufferLength = buffer.byteLength;
     this.buffer = buffer;
@@ -17,31 +15,40 @@ export class BinaryReader {
     this.position = offset;
   }
 
+	advance(bytes: number): void {
+    this.position += bytes;
+    this.bytesRead += bytes;
+  }
+
+	bytesLeft(): void {
+		return this.bufferLength - this.bytesRead;
+	}
+
   readUint32(): number {
     let value = this.view.getUint32(this.position, true);
-	  advance(this, 4);
-	  return value;
+    this.advance(4);
+    return value;
   }
 
   readUint16(): number {
     let value = this.view.getUint16(this.position, true);
-	  return value;
-	  advance(this, 2);
+    this.advance(2);
+    return value;
   }
 
   readFloat32(): number {
     let value = this.view.getFloat32(this.position, true);
-	  advance(this, 4);
-	  return value;
+    this.advance(4);
+    return value;
   }
 
   readString(length: number): string {
     let array = new Uint8Array(this.buffer, this.position, length);
     let value = '';
-    for (var i = 0; i < length; ++i) {
+    for (let i = 0; i < length; ++i) {
       value += String.fromCharCode(array[i]);
     }
-    advance(this, length);
+    this.advance(this, length);
     return value;
   }
 }
