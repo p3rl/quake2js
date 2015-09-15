@@ -1,10 +1,14 @@
 import * as assetMgr from './asset-mgr';
+import * as log from './asset-mgr';
+
+log.useDefaultConfiguration();
+let logger = log.getLogger('Main');
 
 assetMgr.loadMap('q2dm1')
         .then(map => {
-          console.log('Map magic: ' + map.header.magic);
-          console.log('Map version: ' + map.header.version);
+          logger.info('Map magic: ' + map.header.magic);
+          logger.info('Map version: ' + map.header.version);
         })
         .catch(error => {
-          console.log(error);
+          logger.error(error);
         });

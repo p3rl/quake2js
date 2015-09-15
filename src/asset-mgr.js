@@ -13,8 +13,7 @@ export function loadMap(name: string): Promise<Bsp> {
     request.onreadystatechange = () => {
       if (request.readyState === 4) {
         if (request.status === 200) {
-          var map = bsp.readFromBuffer(request.response);
-          resolve(map);
+          resolve(bsp.readFromBuffer(request.response));
         } else {
           reject(new Error(request.statusText));
         }
@@ -23,7 +22,7 @@ export function loadMap(name: string): Promise<Bsp> {
 
     request.onerror = () => {
       reject(new Error('XMLHttpRequest error: ' + request.statusText));
-    }
+    };
 
     request.open('GET', baseUrl + '/maps/q2dm1.bsp', true);
     request.responseType = 'arraybuffer';

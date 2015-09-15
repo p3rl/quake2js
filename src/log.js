@@ -1,6 +1,9 @@
 let loggers = {};
 let config = undefined;
 
+/**
+ * Writes log messages to log targets.
+ */
 function writeLog(loggerName: string, level: logLevel, message: string): void {
   if (!config || config.loggingRules.length === 0) {
     throw new Error('Logging framework is not configured');
@@ -31,9 +34,9 @@ interface LogTarget {
 }
 
 class Logger {
-  constructor(name: string, writeLog) {
+  constructor(name: string, write) {
     this.name = name;
-    this.writeLog = writeLog;
+    this.writeLog = write;
   }
 
   error(message: string): void {
@@ -55,20 +58,16 @@ class Logger {
 
 function getLogLevelString(level: logLevel): string {
   switch (level) {
-    case 1:
-      return 'Error';
-      break;
-    case 2:
-      return 'Warning';
-      break;
-    case 3:
-      return 'Info';
-      break;
-    case 4:
-      return 'Debug';
-      break;
-    default:
-      return 'None';
+  case 1:
+    return 'Error';
+  case 2:
+    return 'Warning';
+  case 3:
+    return 'Info';
+  case 4:
+    return 'Debug';
+  default:
+    return 'None';
   }
 }
 
@@ -81,22 +80,33 @@ export const logLevel = {
 };
 
 /**
-* Configure logging with the specified configuration.
-*/
+ * Configure logging with the specified configuration.
+ */
 export function configure(configuration: LoggingConfiguration): void {
   config = configuration;
 }
 
 /**
-* Gets the logger with the specified name.
-*/
+ * Gets the logger with the specified name.
+ * @param  name Name of the logger.
+ * @return An instance of the logger.
+ */
 export function getLogger(name: string): Logger {
   return loggers[name] || (loggers[name] = new Logger(name, writeLog));
 }
 
 /**
-* Logging rule
-*/
+ * Setup the logging framework using the default configuration.
+ */
+export function useDefaultConfiguration(): Logger {
+  config = new LoggingConfiguration();
+  let target = new ConsoleLogTarget();
+  config.addRule(new LoggingRule('*', log.logLevel.debug, target));
+}
+
+/**
+ * Represents a logging rule.
+ */
 export class LoggingRule {
   constructor(pattern: string, minLevel: logLevel, logTarget: LogTarget) {
     this.pattern = pattern;
@@ -106,8 +116,8 @@ export class LoggingRule {
 }
 
 /**
-* Logging configuration.
-*/
+ * A logging configuration with differnt rules and targets.
+ */
 export class LoggingConfiguration {
   constructor() {
     this.loggingRules = [];
@@ -122,13 +132,15 @@ export class LoggingConfiguration {
 }
 
 /**
-* Console log target
-*/
+ * Console log target.
+ */
 export class ConsoleLogTarget {
   write(logEventInfo: LogEventInfo): void {
+    /*eslint-disable */
     console.log('[' + logEventInfo.timeStamp.toLocaleTimeString() + '] ' +
                 '[' + getLogLevelString(logEventInfo.logLevel) + '] ' +
                 '[' + logEventInfo.loggerName + ']: ' +
                 logEventInfo.message);
+    /*eslint-enable */
   }
 }
