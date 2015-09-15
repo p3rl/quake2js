@@ -1,2 +1,2 @@
-# quake2js
-Quake 2 port to javascript
+# Quake2js
+Exploring javascript and the quake 2 game engine.
