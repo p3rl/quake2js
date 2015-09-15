@@ -1,7 +1,7 @@
 export class BinaryReader {
 
   constructor(buffer: ArrayBuffer) {
-    if (buffer == null || buffer.byteLength === 0) {
+    if (buffer === null || buffer === undefined || buffer.byteLength === 0) {
       throw new TypeError('Invalid buffer');
     }
     this.bytesRead = 0;
@@ -12,20 +12,20 @@ export class BinaryReader {
   }
 
   seek(offset: number): void {
-		if (offset >= this.bufferLength) {
-			throw new Error('Position out of bounds');
-		}
-		this.position = offset;
+    if (offset >= this.bufferLength) {
+      throw new Error('Position out of bounds');
+    }
+    this.position = offset;
   }
 
-	advance(bytes: number): void {
+  advance(bytes: number): void {
     this.position += bytes;
     this.bytesRead += bytes;
   }
 
-	bytesLeft(): void {
-		return this.bufferLength - this.bytesRead;
-	}
+  bytesLeft(): void {
+    return this.bufferLength - this.bytesRead;
+  }
 
   readUint32(): number {
     let value = this.view.getUint32(this.position, true);

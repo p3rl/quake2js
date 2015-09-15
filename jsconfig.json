@@ -4,8 +4,6 @@
     "module": "system"
   },
   "files": [
-    "src/io/binary-reader.js",
-    "src/bsp/bsp-reader.js",
-    "node_modules/jasmine-core/lib/jasmine-core/jasmine.js"
+    "./src/**/*.js"
   ]
 }

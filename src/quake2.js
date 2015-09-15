@@ -1,13 +1,10 @@
-import {readFromBuffer} from 'bsp/bsp-reader';
-console.log('Starting quake 2');
+import * as assetMgr from './asset-mgr';
 
-var request = new XMLHttpRequest();
-request.onreadystatechange = () => {
-  if (request.readyState == 4 && request.status == 200) {
-    var map = readFromBuffer(request.response);
-	}
-};
-request.open('GET', 'http://localhost:3000/maps/q2dm1.bsp', true);
-request.responseType = 'arraybuffer';
-request.setRequestHeader('Content-Type', 'text/plain');
-request.send(null);
+assetMgr.loadMap('q2dm1')
+        .then(map => {
+          console.log('Map magic: ' + map.header.magic);
+          console.log('Map version: ' + map.header.version);
+        })
+        .catch(error => {
+          console.log(error);
+        });

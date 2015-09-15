@@ -1,5 +1,5 @@
 System.config({
-  defaultJSExtensions: true,
+	defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {
     "optional": [
