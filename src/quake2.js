@@ -9,11 +9,11 @@ let logger = log.getLogger('Main');
 let renderer = new Renderer();
 renderer.initialize(document.getElementById('canvas'));
 
-let timer = new Timer();
-timer.start();
+let stopWatch = new StopWatch();
+stopWatch.start();
 let render = () => {
-  let delta = timer.getDelta();
-  console.log('Delta: ' + delta);
+  let delta = stopWatch.getDelta();
+  renderer.render(scene, camera);
   window.requestAnimationFrame(render);
 }
 
