@@ -101,7 +101,7 @@ export function getLogger(name: string): Logger {
 export function useDefaultConfiguration(): Logger {
   config = new LoggingConfiguration();
   let target = new ConsoleLogTarget();
-  config.addRule(new LoggingRule('*', log.logLevel.debug, target));
+  config.addRule(new LoggingRule('*', logLevel.debug, target));
 }
 
 /**
