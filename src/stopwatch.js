@@ -1,7 +1,7 @@
 /**
- * A timer.
+ * A stop watch.
  */
-export class Timer {
+export class StopWatch {
   constructor() {
     this.startTime = 0.0;
     this.previousTime = 0.0;
@@ -20,7 +20,7 @@ export class Timer {
     return totalTime;
   }
 
-  getElapsedMiliseconds(): number {
+  getElapsedMilliseconds(): number {
     return performance.now() - this.startTime;
   }
 
