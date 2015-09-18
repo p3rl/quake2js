@@ -17,7 +17,14 @@ export class ShaderProgram {
     this.fragmentShader = fragmentShader;
   }
 
-  static create(gl: any, name: string, vertexShader: Shader, fragmentShader: Shader): ShaderProgram {
+  /**
+   * Create a new instace of a shader program.
+   * @param  {WebGlRenderingContext} gl The WebGL renderingcontext.
+   * @param  {string} name The name of the shader proram.
+   * @param  {Shader} vertexShader The vertex shader.
+   * @param  {Shader} fragmentShader The fragment shader.
+   */
+  static create(gl: WebGlRenderingContext, name: string, vertexShader: Shader, fragmentShader: Shader): ShaderProgram {
     let program = gl.createProgram();
     gl.attachShader(vertexShader.shader);
     gl.attachShader(fragmentShader.shader);

@@ -5,10 +5,10 @@ export const shaderType = {
 
 export class Shader {
 
-  constructor(name: string, shader: any, shaderType: string) {
+  constructor(name: string, shader: any, type: shaderType) {
     this.name = name;
     this.shader = shader;
-    this.shaderType = shaderType;
+    this.shaderType = type;
   }
 
   static compile(gl: any, name: string, source: string, type: shaderType): Shader {
@@ -26,7 +26,7 @@ export class Shader {
     gl.compileShader(shader);
     let success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
     if (!success) {
-      throw new Error('Failed to compile shader ' + name +' :' + gl.getShaderInfoLog(shader));
+      throw new Error('Failed to compile shader ' + name + ' :' + gl.getShaderInfoLog(shader));
     }
 
     return new Shader(name, shader, type);
@@ -45,11 +45,10 @@ export class Shader {
 }
 
 function getShaderTypeFromScriptElement(scriptElement: any): shaderType {
-  if (scriptElement.type == 'x-shader/x-vertex') {
+  if (scriptElement.type === 'x-shader/x-vertex') {
     return shaderType.vertex;
-  } else if (scriptElement.type == 'x-shader/x-fragment') {
+  } else if (scriptElement.type === 'x-shader/x-fragment') {
     return shaderType.fragment;
-  } else {
-    return undefined;
   }
+  return undefined;
 }

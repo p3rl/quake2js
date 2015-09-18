@@ -102,8 +102,12 @@ export class Vector3 {
   }
 
   static cross(a: Vector3, b: Vector3, out: Vector3): Vector3 {
-    let ax = a.components[0], ay = a.components[1], az = a.components[2],
-        bx = b.components[0], by = b.components[1], bz = b.components[2];
+    let ax = a.components[0];
+    let ay = a.components[1];
+    let az = a.components[2];
+    let bx = b.components[0];
+    let by = b.components[1];
+    let bz = b.components[2];
     out.components[0] = ay * bz - az * by;
     out.components[1] = az * bx - ax * bz;
     out.components[2] = ax * by - ay * bx;

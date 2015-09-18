@@ -34,14 +34,15 @@ export class ShaderMgr {
     }
 
     let shaderProgram = ShaderProgram.create(this.gl, name, vs, fs);
-    this.programs.push(shaderProgram)
+    this.programs.push(shaderProgram);
     this.logger.info('Successfully create shader program ' + name);
   }
 
   getShader(name: string): Shader {
     for (let shader of this.shaders) {
-      if (shader.name === name)
+      if (shader.name === name) {
         return shader;
+      }
     }
     return null;
   }

@@ -1,4 +1,4 @@
-import {Vector3, Quaternion} from '../math/math';
+import {Vector3} from '../math/math';
 
 export class Camera {
 
