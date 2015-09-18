@@ -1,13 +1,22 @@
 import * as assetMgr from './asset-mgr';
 import * as log from './log';
-import {Renderer} from './renderer/renderer';
-import {Timer} from './timer';
+import {Renderer} from './rendering/renderer';
+import {ShaderMgr} from './rendering/shadermgr';
+import {StopWatch} from './stopwatch';
 
 log.useDefaultConfiguration();
 let logger = log.getLogger('Main');
 
-let renderer = new Renderer();
-renderer.initialize(document.getElementById('canvas'));
+let canvas = document.getElementById('canvas');
+let context = canvas.getContext('experimental-webgl');
+let shaderMgr = new ShaderMgr(context);
+shaderMgr.loadShaderFromScriptElement('default-fs', 'shader-fs');
+shaderMgr.loadShaderFromScriptElement('default-vs', 'shader-vs');
+console.log('Loading shader');
+
+/*
+let renderer = new Renderer(context, canvas);
+
 
 let stopWatch = new StopWatch();
 stopWatch.start();
@@ -17,7 +26,7 @@ let render = () => {
   window.requestAnimationFrame(render);
 }
 
-
+*/
 
 /*
 assetMgr.loadMap('q2dm1')
