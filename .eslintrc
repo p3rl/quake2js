@@ -59,7 +59,7 @@
     "no-duplicate-case": 2,          // http://eslint.org/docs/rules/no-duplicate-case
     "no-empty": 2,                   // http://eslint.org/docs/rules/no-empty
     "no-ex-assign": 2,               // http://eslint.org/docs/rules/no-ex-assign
-    "no-extra-boolean-cast": 0,      // http://eslint.org/docs/rules/no-extra-boolean-cast
+    "no-extra-boolean-cast": 0,      // http://eslint.org/docs/rules/no-extra-boolean-castone
     "no-extra-semi": 2,              // http://eslint.org/docs/rules/no-extra-semi
     "no-func-assign": 2,             // http://eslint.org/docs/rules/no-func-assign
     "no-inner-declarations": 2,      // http://eslint.org/docs/rules/no-inner-declarations

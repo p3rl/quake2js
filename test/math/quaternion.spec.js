@@ -24,5 +24,4 @@ describe('Quaternion', () => {
     expect(q.w).toEqual(4);
   })
 
-
 });

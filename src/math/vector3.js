@@ -1,14 +1,10 @@
-function alloc() {
-  return new Float32Array(3);
-}
-
 /**
  * A 3d vector with value semantics.
  */
 export class Vector3 {
 
   constructor(x: number, y: number, z: number) {
-    this.components = alloc();
+    this.components = new Float32Array(3);
     this.components[0] = x || 0;
     this.components[1] = y || 0;
     this.components[2] = z || 0;
